@@ -1,0 +1,54 @@
+<ion-view view-title="Weather">
+  <ion-content class="weather-today" style="background: {{style.background}}; color: {{style.color}}; border-color: {{style.color}};" on-swipe-left="goForward()">
+  	<ion-refresher
+  	  pulling-text="Pull to refresh..."
+  	  on-refresh="Refresh()">
+  	</ion-refresher>
+    <ion-list class=''>
+			<ion-item>
+				<div class="row">
+				  <div class="col">
+				    <h2 class="title">{{now.weather.name}}</h2>
+						<p class="title">{{now.weather.weather[0].description}}</p>
+						<h1 class="title">{{now.minC}}°</h1>
+				  </div>
+				  <div class="col text-right">
+						<i class="icon big-icon {{now.icon}}"></i>
+				  </div>
+				</div>
+			</ion-item>
+			<ion-item class="text-center item-divider">
+				<div class="row row-center">
+				  <div class="col">
+				    <p>Час</p>
+				  </div>
+				  <div class="col">
+				    <p>Погода</p>
+				  </div>
+				  <div class="col">
+				    <p>t °</p>
+				  </div>
+				  <div class="col">
+				    <p>Вітер</p>
+				  </div>
+				</div>
+			</ion-item>
+			<ion-item class="text-center" ng-repeat='time in hours | limitTo: 5'>
+				<div class="row row-center">
+				  <div class="col">
+				    <h2>{{time.date.getHours() +":0"+time.date.getMinutes()}}</h2>
+				  </div>
+				  <div class="col">
+				    <i class="icon {{time.icon}} small-icon"></i>
+				  </div>
+				  <div class="col">
+				    <h2>{{time.maxC}}°</h2>
+				  </div>
+				  <div class="col">
+				    <h2><i class="icon ion-navigate" style="display: inline-block; transform: rotate({{time.wind.deg -45 - magneticHeading}}deg);"></i>  {{time.wind.speed}} м/c</h2>
+				  </div>
+				</div>
+			</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

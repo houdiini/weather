@@ -1,0 +1,91 @@
+<ion-view view-title="Weather">
+  <ion-content class="" on-swipe-right="goBack()">
+		<ion-header-bar align-title="left" class="bar-stable item-input-inset">
+			<label class="item-input-wrapper" id="search-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Search" ng-model="data.query" ng-change="search()">
+      </label>
+		</ion-header-bar>
+
+	<ion-list class='{{!city?"":"hide"}}'>
+		<ion-item href="#" class="text-center">
+			<i class="icon icon-large ion-ios-glasses-outline"></i>
+			<h2>Введіть місто!</h1>
+		</ion-item>
+	</ion-list>
+
+	<ion-list class='{{city?"":"hide"}}'>
+	  <ion-item href="#" class="icon-right">
+	    <div class="row">
+	      <div class="col">
+	        <h2 class="title">{{city}}</h2>
+	        <p>{{day[activeDay].items[data.indexHour].wd}}</p>
+	        <h1>{{day[activeDay].items[data.indexHour].maxC}}°</h1>
+	      </div>
+	      <div class="col text-right">
+	        <i class="icon big-icon {{day[activeDay].items[data.indexHour].icon}}"></i>
+	      </div>
+	    </div>
+	  </ion-item>
+	  <ion-item class="item-divider">
+	    <div class="range range-positive">
+	      <!-- <i class="icon ion-volume-low"></i> -->
+	      <input type="range" 
+	        name="indexHour" 
+	        ng-model="data.indexHour"
+	        min="0" 
+	        max="{{day[activeDay].items.length - 1}}"
+	      >
+	      <!-- <i class="icon ion-volume-high"></i> -->
+	    </div>
+	  </ion-item>
+	  <ion-item class="padding-0"> 
+	    <div class="row padding-0">
+	      <div 
+	        ng-repeat="d in day"
+	        class="col text-center {{day.indexOf(d) === activeDay?'active-tab':''}}"
+	        ng-click="dayShow(day.indexOf(d))">
+	        <p> {{d.day}} </p>
+	        <i class="icon small-icon {{d.items[0].icon}}"></i>
+	        <p> {{d.minC}}° | {{d.maxC}}° </p>
+	      </div>
+	    </div>
+	  </ion-item>
+	  <ion-item class="item-divider">
+	    {{day[activeDay].fullDay + " " + day[activeDay].date.getDate()}}
+	  </ion-item>
+	  <ion-item class="padding-0">
+	    <div class="row text-center padding-0">
+	      <a class="col padding my-tab {{data.indexGraphTab === 'temp'?'active-tab' : ''}}" ng-click="data.indexGraphTab = 'temp'">
+	        <h3><i class="icon ion-thermometer"></i> Температура</h3>
+	      </a>
+	      <div class="col padding my-tab {{data.indexGraphTab === 'wet'?'active-tab' : ''}}" ng-click="data.indexGraphTab = 'wet'">
+	        <h3><i class="icon ion-waterdrop"></i> Вологість</h3>
+	      </div>
+	      <div class="col padding my-tab {{data.indexGraphTab === 'bar'?'active-tab' : ''}}" ng-click="data.indexGraphTab = 'bar'">
+	        <h3><i class="icon ion-speedometer"></i> Тиск</h3>
+	      </div>
+	    </div>
+	  </ion-item>
+	  <ion-item>
+	    <canvas id="bar" class="chart chart-line" 
+	      chart-data="graph[activeDay][data.indexGraphTab]"
+	      labels="graph[activeDay].labels"
+	      height: '100px';
+	      width: '100%'>
+	    </canvas>
+	  </ion-item>
+	  <ion-item href="#">
+	    Вітер: {{day[activeDay].items[0].wind.speed}} м/с.
+	    <i class="icon "></i>
+	  </ion-item>
+	  <ion-item href="#">
+	    Вологість: {{day[activeDay].items[0].humidity}}%.
+	  </ion-item>
+	  <ion-item href="#">
+	    Тиск: {{day[activeDay].items[0].pressure}} гПа.
+	  </ion-item>
+	</ion-list>
+
+  </ion-content>
+</ion-view>

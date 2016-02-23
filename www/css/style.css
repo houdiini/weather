@@ -1,0 +1,72 @@
+/* Empty. Add your own CSS if you like */
+.big-icon {
+	font-size: 100px;
+}
+
+.small-icon {
+	font-size: 40px;
+}
+
+.icon-large {
+	font-size: 150px;
+}
+
+.time-scall {
+	padding: 0;
+	margin-top: -10px;
+}
+
+.active-tab > p, .active-tab > h3{
+	color: inherit;
+}
+
+.my-tab {
+	padding:15px 10px;
+}
+
+.hide {
+	visibility: hidden;
+	opacity: 0;
+}
+
+.active-tab {
+	background: #387EF5;
+	color: #FFF;
+	outline: 1px;
+}
+
+.tabs {
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.padding-0 {
+	padding: 0;
+}
+
+.weather-today {
+	transition: background .6s, color .3s;
+}
+
+.weather-today .list .item:first-child {
+	border-top: none;
+}
+
+/**/
+.weather-today .item,
+.weather-today .list,
+.weather-today p,
+.weather-today h1,
+.weather-today h2, 
+.weather-today .scroll-refresher .ionic-refresher-content {
+	color: inherit;
+	background: transparent;
+	transition: inherit;
+	border-color: inherit;
+	/*transition: background .6s, color .3s;*/
+}
+
+.weather-today .item-divider {
+	color: rgba(255, 255, 255, 0.8);
+	background:  rgba(0, 0, 0, 0.4);
+	border-color: inherit;
+}
